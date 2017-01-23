@@ -1,4 +1,4 @@
-package nlftime
+package lib
 
 import (
 	"testing"
