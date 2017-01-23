@@ -1,0 +1,9 @@
+package: github.com/morikuni/nlftime
+import:
+- package: github.com/olebedev/when
+  subpackages:
+  - rules/common
+  - rules/en
+- package: github.com/jehiah/go-strftime
+- package: github.com/alecthomas/kingpin
+  version: ^2.2.3

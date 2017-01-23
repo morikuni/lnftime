@@ -1,0 +1,13 @@
+hash: 558b9605621ca472c208328857ac69147b1fbd0b735e3edb83935ae56238e96d
+updated: 2017-01-23T20:24:24.46479581+09:00
+imports:
+- name: github.com/alecthomas/kingpin
+  version: e9044be3ab2a8e11d4e1f418d12f0790d57e8d70
+- name: github.com/jehiah/go-strftime
+  version: 2efbe75097a505e2789f7e39cb9da067b5be8e3e
+- name: github.com/olebedev/when
+  version: f9f6f45a835fab449cbd44a0828214c783f869ef
+  subpackages:
+  - rules/common
+  - rules/en
+testImports: []
