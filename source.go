@@ -25,5 +25,5 @@ func (s source) Generate() (string, error) {
 
 // NewSource creates a new Source.
 func NewSource(r io.Reader, bufferSize int) Source {
-	return source{r, bytes.NewBuffer(make([]byte, bufferSize))}
+	return source{r, bytes.NewBuffer(make([]byte, 0, bufferSize))}
 }
