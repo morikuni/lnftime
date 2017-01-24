@@ -1,9 +1,6 @@
 package lib
 
-import (
-	"bytes"
-	"io"
-)
+import "io"
 
 // Source generates a text.
 type Source interface {
@@ -12,18 +9,18 @@ type Source interface {
 
 type source struct {
 	r   io.Reader
-	buf *bytes.Buffer
+	buf []byte
 }
 
 func (s source) Generate() (string, error) {
-	_, err := io.CopyN(s.buf, s.r, int64(s.buf.Cap()))
+	_, err := s.r.Read(s.buf)
 	if err != nil {
 		return "", err
 	}
-	return s.buf.String(), nil
+	return string(s.buf), nil
 }
 
 // NewSource creates a new Source.
 func NewSource(r io.Reader, bufferSize int) Source {
-	return source{r, bytes.NewBuffer(make([]byte, 0, bufferSize))}
+	return source{r, make([]byte, bufferSize)}
 }
