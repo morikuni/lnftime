@@ -20,7 +20,7 @@ func Time(s rules.Strategy) rules.Rule {
 			`:` +
 			`([0-5]?[0-9])` +
 			`(?::([0-5]?[0-9]))?` +
-			`(?:\s?([apAP][mM]))?` +
+			`(?:\s?([apAP]\.?[mM]\.?))` +
 			`(?:\W|$)`),
 		Applier: func(m *rules.Match, c *rules.Context, o *rules.Options, ref time.Time) (bool, error) {
 			if (c.Hour != nil || c.Minute != nil || c.Second != nil) && s != rules.Override {
@@ -30,7 +30,7 @@ func Time(s rules.Strategy) rules.Rule {
 			hour, _ := strconv.Atoi(m.Captures[0])
 			minute, _ := strconv.Atoi(m.Captures[1])
 			second, _ := strconv.Atoi(m.Captures[2])
-			ampm := strings.ToLower(m.Captures[3])
+			ampm := strings.ToLower(strings.Replace(m.Captures[3], ".", "", -1))
 
 			hour, ok := FixAMPM(ampm, hour)
 			if !ok {
