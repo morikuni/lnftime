@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	// ErrNoTimeFound indicates that no time found in the context.
-	ErrNoTimeFound = errors.New("no time found in the context")
+	// ErrNoTimeFound indicates that no time found in the text.
+	ErrNoTimeFound = errors.New("no time found in the text")
 )
 
 // Parser parse string into time object according to specific base time.
