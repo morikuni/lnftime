@@ -15,13 +15,18 @@ func main() {
 }
 
 func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
-	format := kingpin.Flag("format", "strftime format string").Short('f').Default("%Y-%m-%dT%H:%M:%S%z").String()
+	app := kingpin.New("nlftime", "nlftime converts the date/time included in natural language into the specific format.")
+	format := app.Flag("format", "strftime format").Short('f').Default("%Y-%m-%dT%H:%M:%S%z").String()
 
-	kingpin.Parse()
+	_, err := app.Parse(args[1:])
+	if err != nil {
+		fmt.Fprintln(errW, err)
+		return 1
+	}
 
 	source := lib.NewSource(in, 2048)
 	parser := lib.NewParser()
-	formatter := lib.NewFormatter()
+	formatter := lib.NewStrftimeFormatter()
 
 	s, err := source.Generate()
 	if err != nil {
