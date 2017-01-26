@@ -16,7 +16,8 @@ func main() {
 
 func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 	app := kingpin.New("nlftime", "nlftime converts the date/time included in natural language into the specific format.")
-	format := app.Flag("format", "strftime format").Short('f').Default("%Y-%m-%dT%H:%M:%S%z").String()
+	format := app.Flag("strftime", "strftime format").Short('s').Default("%Y-%m-%dT%H:%M:%S%z").String()
+	unix := app.Flag("unix", "unix time").Short('u').Default("false").Bool()
 
 	_, err := app.Parse(args[1:])
 	if err != nil {
@@ -26,7 +27,13 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 
 	source := lib.NewSource(in, 2048)
 	parser := lib.NewParser()
-	formatter := lib.NewStrftimeFormatter()
+	var formatter lib.Formatter
+	switch {
+	case *unix:
+		formatter = lib.NewUnixFormatter()
+	default:
+		formatter = lib.NewStrftimeFormatter(*format)
+	}
 
 	s, err := source.Generate()
 	if err != nil {
@@ -40,6 +47,6 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 		return 1
 	}
 
-	fmt.Fprintln(out, formatter.Format(*format, t))
+	fmt.Fprintln(out, formatter.Format(t))
 	return 0
 }
