@@ -1,13 +1,27 @@
-hash: 558b9605621ca472c208328857ac69147b1fbd0b735e3edb83935ae56238e96d
-updated: 2017-01-23T20:24:24.46479581+09:00
+hash: af919ecf008aac383c9147a5e6f8478fa3fadb8c0c7db2d7a29e19895e467ac3
+updated: 2017-01-27T08:54:45.132266153+09:00
 imports:
 - name: github.com/alecthomas/kingpin
   version: e9044be3ab2a8e11d4e1f418d12f0790d57e8d70
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
+- name: github.com/AlekSi/pointer
+  version: 08a25bac605b3fcb6cc27f3917b2c2c87451963d
+- name: github.com/dustin/go-humanize
+  version: 7a41df006ff9af79a29f0ffa9c5f21fbe6314a2d
 - name: github.com/jehiah/go-strftime
   version: 2efbe75097a505e2789f7e39cb9da067b5be8e3e
 - name: github.com/olebedev/when
   version: f9f6f45a835fab449cbd44a0828214c783f869ef
   subpackages:
+  - rules
   - rules/common
   - rules/en
+  - rules/ru
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 testImports: []

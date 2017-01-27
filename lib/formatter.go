@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/dustin/go-humanize"
 	"github.com/jehiah/go-strftime"
 )
 
@@ -26,6 +27,12 @@ func (f unixFormatter) Format(t time.Time) string {
 	return strconv.FormatInt(t.Unix(), 10)
 }
 
+type humanizeFormatter struct{}
+
+func (f humanizeFormatter) Format(t time.Time) string {
+	return humanize.Time(t)
+}
+
 // NewStrftimeFormatter creates a new Formatter for strftime format.
 func NewStrftimeFormatter(format string) Formatter {
 	return strftimeFormatter{format}
@@ -34,4 +41,8 @@ func NewStrftimeFormatter(format string) Formatter {
 // NewUnixFormatter creates a new Formatter for unix time.
 func NewUnixFormatter() Formatter {
 	return unixFormatter{}
+}
+
+func NewHumanizeFOrmatter() Formatter {
+	return humanizeFormatter{}
 }
