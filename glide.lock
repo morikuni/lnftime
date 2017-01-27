@@ -1,5 +1,5 @@
-hash: af919ecf008aac383c9147a5e6f8478fa3fadb8c0c7db2d7a29e19895e467ac3
-updated: 2017-01-27T08:54:45.132266153+09:00
+hash: a7a02c2ae5f130cd5ef25f95eb0b9fcd86bc02e120c2b54548eaaca94f2b36a4
+updated: 2017-01-27T21:46:25.791568952+09:00
 imports:
 - name: github.com/alecthomas/kingpin
   version: e9044be3ab2a8e11d4e1f418d12f0790d57e8d70
@@ -24,4 +24,6 @@ imports:
   - rules/ru
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
+- name: github.com/spf13/pflag
+  version: a9a634f3de0a7529baded7ad6b0c7467d5c6eca7
 testImports: []

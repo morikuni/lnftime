@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/alecthomas/kingpin"
 	"github.com/morikuni/nlftime/lib"
+	"github.com/spf13/pflag"
 )
 
 func main() {
@@ -15,15 +15,27 @@ func main() {
 }
 
 func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
-	app := kingpin.New("nlftime", "nlftime converts the date/time included in natural language into the specific format.")
-	format := app.Flag("strftime", "strftime format").Short('s').Default("%Y-%m-%dT%H:%M:%S%z").String()
-	unix := app.Flag("unix", "unix time").Short('u').Default("false").Bool()
-	humanize := app.Flag("humanize", "relative time").Default("false").Bool()
+	flag := pflag.NewFlagSet("nlftime", pflag.ContinueOnError)
 
-	_, err := app.Parse(args[1:])
+	format := flag.String("strftime", "%Y-%m-%dT%H:%M:%S%z", "output in strftime format.")
+	unix := flag.Bool("unix", false, "output in unix time.")
+	humanize := flag.Bool("humanize", false, "output in relative time.")
+	help := flag.BoolP("help", "h", false, "print this help.")
+	flag.Usage = func() {
+		fmt.Fprintln(errW)
+		fmt.Fprintln(errW, "Usage: nlftime [flags] <text>")
+		fmt.Fprintln(errW)
+		fmt.Fprintln(errW, flag.FlagUsages())
+	}
+
+	err := flag.Parse(args[1:])
 	if err != nil {
-		fmt.Fprintln(errW, err)
 		return 1
+	}
+
+	if *help {
+		flag.Usage()
+		return 0
 	}
 
 	source := lib.NewSource(in, 2048)
