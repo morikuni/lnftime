@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/morikuni/nlftime/lib"
@@ -36,6 +37,11 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 	if *help {
 		flag.Usage()
 		return 0
+	}
+
+	ags := flag.Args()
+	if len(ags) != 0 {
+		in = strings.NewReader(strings.Join(ags, " "))
 	}
 
 	source := lib.NewSource(in, 2048)
