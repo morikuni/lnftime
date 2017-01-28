@@ -3,6 +3,8 @@ language: go
 go:
   - 1.7.x
 
-install: glide install
+install:
+  - curl https://glide.sh/get | sh
+  - glide install
 
 script: go test -v (glide nv)
