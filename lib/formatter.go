@@ -43,6 +43,6 @@ func NewUnixFormatter() Formatter {
 	return unixFormatter{}
 }
 
-func NewHumanizeFOrmatter() Formatter {
+func NewHumanizeFormatter() Formatter {
 	return humanizeFormatter{}
 }

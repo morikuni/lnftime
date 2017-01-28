@@ -61,7 +61,7 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 	case *unix:
 		formatter = lib.NewUnixFormatter()
 	case *humanize:
-		formatter = lib.NewHumanizeFOrmatter()
+		formatter = lib.NewHumanizeFormatter()
 	default:
 		formatter = lib.NewStrftimeFormatter(*format)
 	}
