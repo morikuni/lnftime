@@ -8,4 +8,4 @@ install:
   - curl https://glide.sh/get | sh
   - glide install
 
-script: go test -v (glide nv)
+script: go test -v $(glide nv)
