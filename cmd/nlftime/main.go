@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/morikuni/nlftime/lib"
+	"github.com/morikuni/nlftime"
 	"github.com/spf13/pflag"
 )
 
@@ -54,16 +54,16 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 		in = strings.NewReader(strings.Join(ags, " "))
 	}
 
-	source := lib.NewSource(in, 2048)
-	parser := lib.NewParser()
-	var formatter lib.Formatter
+	source := nlftime.NewSource(in, 2048)
+	parser := nlftime.NewParser()
+	var formatter nlftime.Formatter
 	switch {
 	case *unix:
-		formatter = lib.NewUnixFormatter()
+		formatter = nlftime.NewUnixFormatter()
 	case *humanize:
-		formatter = lib.NewHumanizeFormatter()
+		formatter = nlftime.NewHumanizeFormatter()
 	default:
-		formatter = lib.NewStrftimeFormatter(*format)
+		formatter = nlftime.NewStrftimeFormatter(*format)
 	}
 
 	s, err := source.Generate()

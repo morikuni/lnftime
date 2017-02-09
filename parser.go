@@ -1,10 +1,10 @@
-package lib
+package nlftime
 
 import (
 	"errors"
 	"time"
 
-	"github.com/morikuni/nlftime/lib/whenrule"
+	"github.com/morikuni/nlftime/whenrule"
 	"github.com/olebedev/when"
 	"github.com/olebedev/when/rules"
 	"github.com/olebedev/when/rules/common"
