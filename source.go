@@ -1,6 +1,9 @@
 package nlftime
 
-import "io"
+import (
+	"bufio"
+	"io"
+)
 
 // Source generates a text.
 type Source interface {
@@ -8,19 +11,20 @@ type Source interface {
 }
 
 type source struct {
-	r   io.Reader
-	buf []byte
+	sc *bufio.Scanner
 }
 
 func (s source) Generate() (string, error) {
-	_, err := s.r.Read(s.buf)
-	if err != nil {
-		return "", err
+	if !s.sc.Scan() {
+		if err := s.sc.Err(); err != nil {
+			return "", err
+		}
+		return "", io.EOF
 	}
-	return string(s.buf), nil
+	return s.sc.Text(), nil
 }
 
 // NewSource creates a new Source.
-func NewSource(r io.Reader, bufferSize int) Source {
-	return source{r, make([]byte, bufferSize)}
+func NewSource(r io.Reader) Source {
+	return source{bufio.NewScanner(r)}
 }

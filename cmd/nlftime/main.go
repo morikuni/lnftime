@@ -54,7 +54,7 @@ func Run(args []string, in io.Reader, out io.Writer, errW io.Writer) int {
 		in = strings.NewReader(strings.Join(ags, " "))
 	}
 
-	source := nlftime.NewSource(in, 2048)
+	source := nlftime.NewSource(in)
 	parser := nlftime.NewParser()
 	var formatter nlftime.Formatter
 	switch {
